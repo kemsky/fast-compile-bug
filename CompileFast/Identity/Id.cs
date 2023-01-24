@@ -2,25 +2,14 @@ using System.Diagnostics;
 
 namespace CompileFast.Identity;
 
-// some further reading https://andrewlock.net/using-strongly-typed-entity-ids-to-avoid-primitive-obsession-part-1/
-public interface IId
-{
-    long GetValue();
-}
-
 [DebuggerDisplay("{DebuggerDisplay}")]
-public readonly struct Id<T> : IComparable<Id<T>>, IEquatable<Id<T>>, IId
+public readonly struct Id<T> : IComparable<Id<T>>, IEquatable<Id<T>>
 {
     private readonly long _value;
 
     public Id(long value)
     {
         _value = value;
-    }
-
-    long IId.GetValue()
-    {
-        return _value;
     }
 
     public int CompareTo(Id<T> other)
